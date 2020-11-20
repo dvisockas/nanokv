@@ -5,7 +5,11 @@ use std::io::Write;
 fn main() {
   let mut db = Database::new().expect("DB init failed");
   let mut arguments = std::env::args().skip(1);
-  let key = arguments.next().expect("Key missing");
+  let key  = match arguments.next() {
+    Some(c) => { c },
+    None => { return println!("No command supplied") }
+  };
+
   let val = match arguments.next() {
     Some(c) => { c },
     None => { "".to_owned() }
