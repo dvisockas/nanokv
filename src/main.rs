@@ -32,7 +32,7 @@ impl Database {
     let db_path = "kv.db";
 
     if !std::path::Path::new(db_path).exists() {
-        std::fs::File::create(db_path)?;
+      std::fs::File::create(db_path)?;
     }
 
     let contents = std::fs::read_to_string(db_path)?;
@@ -40,10 +40,10 @@ impl Database {
     let mut map = HashMap::new();
 
     for line in contents.lines() {
-        let mut chunks = line.splitn(2, '\t');
-        let key = chunks.next().expect("No Key");
-        let val = chunks.next().expect("No Val");
-        map.insert(key.to_owned(), val.to_owned());
+      let mut chunks = line.splitn(2, '\t');
+      let key = chunks.next().expect("No Key");
+      let val = chunks.next().expect("No Val");
+      map.insert(key.to_owned(), val.to_owned());
     };
 
     Ok(Database { map: map, db_path: db_path.to_owned() })
